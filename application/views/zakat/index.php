@@ -17,62 +17,54 @@
               </div>
             </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+              <div class="table-responsive p-4 pt-2">
+                <table id="myTable" class="table display align-items-center mb-0">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Waktu</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Keluarga</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">RT</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis Zakat</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah Tanggungan</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggungan</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
-                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Satuan</th> -->
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
                   <tbody>
+                    <?php
+                    foreach ($zakat as $z) { ?>
                     <tr>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0 px-2">12:30</p>
-                        <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
+                        <p class="text-xs font-weight-bold mb-0 px-2"><?= $z['t_waktu']; ?></p>
                       </td>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Fitrah</span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Uang</span>
+                      <td class="align-middle">
+                        <p class="text-xs font-weight-bold mb-0 px-2"><?= $z['t_warga']; ?></p>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">2</span>
+                        <p class="text-xs font-weight-bold mb-0 px-2"><?= $z['t_rt']; ?></p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-success"><?= $z['j_nama'] . ' - ' . $z['a_nama']; ?></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">5</span>
+                        <p class="text-xs font-weight-bold mb-0 px-2"><?= $z['t_tanggungan']; ?></p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold"><?= number_format($z['t_total'],2,',','.') . ' ' . $z['a_satuan']; ?></span>
                       </td>
                       <td class="text-center pe-3">
-                    <!-- <button type="button" class="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#addUkuran"> + </button> -->
-                        <a href="#" class="mx-3" data-bs-original-title="Edit Infaq" data-bs-toggle="modal" data-bs-target="#editInfaq">
+                        <a href="#" class="mx-3" data-bs-original-title="Edit Data Zakat" data-bs-toggle="modal" data-bs-target="#editZakat<?= $z['t_id']; ?>">
                             <i class="fas fa-edit text-info" aria-hidden="true"></i>
                         </a>
                         <!-- Modal -->
-                        <div class="modal fade" id="editInfaq" tabindex="-1" role="dialog" aria-labelledby="editInfaqTitle" aria-hidden="true">
+                        <div class="modal fade" id="editZakat<?= $z['t_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editZakat<?= $z['t_id']; ?>Title" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                               <div class="modal-content">
                                   <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                     <div class="bg-gradient-info shadow-primary border-radius-lg pt-3 pb-1">
                                         <div class="row d-flex justify-content-between">
                                         <div class="col-7 d-flex align-items-center">
-                                            <h5 class="text-white text-capitalize ps-3">Form Edit Infaq</h5>
+                                            <h5 class="text-white text-capitalize ps-3">Form Edit Data Zakat</h5>
                                         </div>
                                         <div class="col-5 pe-4 text-end">
                                             <button type="button" class="btn bg-gradient-danger btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage"> X </button>
@@ -80,34 +72,80 @@
                                         </div>
                                     </div>
                                   </div>
+                                  <?= form_open('zakat/edit/' . $z['t_id']) ?>
                                   <div class="modal-body text-start">
-                                      <form>
+                                    <div class="row">
+                                      <div class="col-9">
                                         <div class="form-group">
-                                            <label for="ukuran1" class="col-form-label">Nama Keluarga</label>
-                                            <select class="form-control" id="ukuran1" name="keluarga">
-                                            <option value=""></option>
-                                            <option value="Rupiah">Rupiah</option>
-                                            <option value="Kg">Kg</option>
-                                            <option value="g">g</option>
-                                            </select>
+                                          <label for="zakat0<?= $z['t_id']; ?>" class="form-label">Nama Keluarga</label>
+                                          <input type="text" list="wargaList0" value="<?= set_value('nama',$z['t_warga']); ?>" class="form-control" id="zakat0<?= $z['t_id']; ?>" name="nama">
+                                          <datalist id="wargaList0">
+                                              <?php foreach ($warga as $wl) {
+                                                  echo '<option value="' . $wl['w_nama'] . '">' . $wl['w_nama'] . '</option>';
+                                              } ?>
+                                          </datalist>
+                                          <?= form_error('nama', '<small class="text-danger">', '</small>'); ?>
                                         </div>
+                                      </div>
+                                      <div class="col-3">
                                         <div class="form-group">
-                                            <label for="ukuran0" class="col-form-label">Nominal</label>
-                                            <input type="text" step="0.01" min="0" class="form-control" id="ukuran0" name="nominal">
+                                          <label for="zakat1<?= $z['t_id']; ?>" class="form-label">RT</label>
+                                          <select class="form-control" id="zakat1<?= $z['t_id']; ?>" name="rt">
+                                            <option value="01" <?= $z['t_rt'] == 01 ? 'selected' : ''; ?>>01</option>
+                                            <option value="02" <?= $z['t_rt'] == 02 ? 'selected' : ''; ?>>02</option>
+                                            <option value="03" <?= $z['t_rt'] == 03 ? 'selected' : ''; ?>>03</option>
+                                            <option value="04" <?= $z['t_rt'] == 04 ? 'selected' : ''; ?>>04</option>
+                                            <option value="05" <?= $z['t_rt'] == 05 ? 'selected' : ''; ?>>05</option>
+                                            <option value="06" <?= $z['t_rt'] == 06 ? 'selected' : ''; ?>>06</option>
+                                          </select>
+                                          <?= form_error('rt', '<small class="text-danger">', '</small>'); ?>
                                         </div>
-                                      </form>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="zakat2<?= $z['t_id']; ?>">Jenis Zakat</label>
+                                      <select class="form-control" id="zakat2<?= $z['t_id']; ?>" name="jenis">
+                                        <!-- <option></option> -->
+                                        <?php 
+                                          foreach ($jenis as $j) {
+                                            echo '<option value="'. $j['j_id'] . '"'; 
+                                            echo $j['j_id'] == $z['t_jenis'] ? 'selected' : '';
+                                            echo '>' . $j['j_nama'] . ' - ' . $j['a_nama'] . '</option>';
+                                          }
+                                        ?>
+                                      </select>
+                                      <?= form_error('jenis', '<small class="text-danger">', '</small>'); ?>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="zakat3<?= $z['t_id']; ?>" class="form-label">Jumlah Tanggungan/Keluarga</label>
+                                      <input type="number" step="1" min="1" value="<?= set_value('tanggungan',$z['t_tanggungan']); ?>" class="form-control" id="zakat3<?= $z['t_id']; ?>" name="tanggungan">
+                                      <?= form_error('tanggungan', '<small class="text-danger">', '</small>'); ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zakat4<?= $z['t_id']; ?>" class="form-label">Total</label>
+                                        <?php 
+                                        if ($z['a_satuan'] === 'Rupiah') {
+                                          $sujum = number_format($z['t_total'],0,',','');
+                                        } elseif ($z['a_satuan'] === 'Kg' || 'g') {
+                                          $sujum = number_format($z['t_total'],2);
+                                        }
+                                        ?>
+                                        <input type="number" min="0" step="0.01" value="<?= set_value('jumlah', $sujum); ?>" class="form-control" id="zakat4<?= $z['t_id']; ?>" name="jumlah">
+                                        <?= form_error('jumlah', '<small class="text-danger">', '</small>'); ?>
+                                    </div>
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
                                       <button type="submit" class="btn bg-gradient-primary">Save</button>
                                   </div>
+                                  <?= form_close(); ?>
                               </div>
                           </div>
                         </div>
-                        <span data-bs-toggle="modal" data-bs-target="#deleteUkuran">
+                        <span data-bs-toggle="modal" data-bs-target="#deleteZakat<?= $z['t_id']; ?>">
                             <i class="cursor-pointer fas fa-trash text-danger" aria-hidden="true"></i>
                         </span>
-                        <div class="modal fade" id="deleteUkuran" tabindex="-1" role="dialog" aria-labelledby="deleteUkuran" aria-hidden="true">
+                        <div class="modal fade" id="deleteZakat<?= $z['t_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteZakat<?= $z['t_id']; ?>" aria-hidden="true">
                             <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -121,156 +159,19 @@
                                     <i class="ni ni-bell-55 ni-3x"></i>
                                     <h4 class="text-gradient text-danger mt-4">You should read this!</h4>
                                     <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                                    <hr class="bg-gradient-secondary">
+                                    <p class="font-weight-bold"><?= $z['t_warga'] . ' - ' . $z['t_rt'] . ' - ' . $z['j_nama'] . '~' . $z['a_nama'] . ' - ' . number_format($z['t_total'],2,',','.') . ' ' . $z['a_satuan']; ?></p>
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-danger">Hapus</button>
+                                  <a href="<?= site_url('zakat/delete/' . $z['t_id']); ?>" class="btn btn-danger">Hapus</a>
                                   <button type="button" class="btn btn-link text-primary ml-auto" data-bs-dismiss="modal">Close</button>
                                 </div>
                               </div>
                             </div>
                         </div>
                     </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                            <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                            <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Executive</p>
-                        <p class="text-xs text-secondary mb-0">Projects</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Michael Levi</h6>
-                            <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user5">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Richard Gran</h6>
-                            <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Executive</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user6">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                            <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
+                    <?php } ?>
                     </tr>
                   </tbody>
                 </table>

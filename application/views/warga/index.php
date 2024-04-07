@@ -17,15 +17,13 @@
               </div>
             </div>
           <div class="card-body px-0 pt-0 pb-2">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
+            <div class="table-responsive p-4 pt-2">
+              <table id="myTable" class="table align-items-center mb-0">
                 <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">L/P</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Keluarga</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah Keluarga</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Anggota Keluarga</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">RT</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Warga</th>
                     <th class="text-secondary text-center text-uppercase text-xxs font-weight-bolder opacity-7">Action</th>
@@ -39,17 +37,11 @@
                       <td class="align-middle text-center">
                         <span class="text-xs font-weight-bold"><?= $no++; ?></span>
                       </td>
-                      <td class="align-middle text-center">
+                      <td class="align-middle">
                         <span class="text-xs font-weight-bold"><?= $w['w_nama']; ?></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-xs font-weight-bold"><?= $w['w_jenis_kelamin']; ?></span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-xs font-weight-bold"><?= $w['w_status_keluarga']; ?></span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-xs font-weight-bold"><?= $w['w_jumlah_keluarga']; ?></span>
+                        <span class="text-xs font-weight-bold"><?= $w['w_anggota_keluarga']; ?></span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-xs font-weight-bold"><?= $w['w_rt']; ?></span>
@@ -83,7 +75,7 @@
                                     </div>
                                   </div>
                                   <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger">Hapus</button>
+                                    <a href="<?= site_url('warga/delete/' . $w['w_id']); ?>" class="btn btn-danger">Hapus</a>
                                     <button type="button" class="btn btn-link text-primary ml-auto" data-bs-dismiss="modal">Close</button>
                                   </div>
                                 </div>

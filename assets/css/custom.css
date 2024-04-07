@@ -1,0 +1,75 @@
+@charset "UTF-8";
+/*font Variables*/
+/*Color Variables*/
+@import url("https://fonts.googleapis.com/css?family=Roboto:300i,400,400i,500,700,900");
+
+#msform {
+  /* text-align: center; */
+  position: relative;
+  padding-top: 5px;
+  margin: 0 auto;
+  background: #ffffff;
+  z-index: 1;
+}
+#msform fieldset {
+  border: 0;
+  padding: 5px 20px;
+  position: relative;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+#msform #progressbar {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+#msform #progressbar li {
+  list-style-type: none;
+  color: #99a2a8;
+  font-size: 9px;
+  width: calc(100%/3);
+  float: left;
+  position: relative;
+  font: 500 13px/1 "Roboto", sans-serif;
+  padding: 5px 0;
+}
+#msform #progressbar li:nth-child(2):before {
+  content: "";
+}
+#msform #progressbar li:nth-child(3):before {
+  content: "";
+}
+#msform #progressbar li:before {
+  content: "";
+  font: normal normal normal 30px/50px Ionicons;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: block;
+  background: #eaf0f4;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+}
+#msform #progressbar li:after {
+  content: "";
+  width: 100%;
+  height: 10px;
+  background: #eaf0f4;
+  position: absolute;
+  left: -50%;
+  top: 21px;
+  z-index: -1;
+}
+#msform #progressbar li:last-child:after {
+  width: 150%;
+}
+#msform #progressbar li.active {
+  color: #5cb85c;
+}
+#msform #progressbar li.active:before, #msform #progressbar li.active:after {
+  background: #5cb85c;
+  color: white;
+}

@@ -4,8 +4,8 @@ function cek_login()
 {
     $ci = get_instance();
     if (!$ci->session->has_userdata('login_session')) {
-        set_pesan('silahkan login.');
-        redirect('auth');
+        set_message('Silahkan login!');
+        redirect('login');
     }
 }
 
@@ -16,7 +16,7 @@ function is_admin()
 
     $status = true;
 
-    if ($level != 'admin') {
+    if ($level != 'Admin') {
         $status = false;
     }
 
@@ -42,10 +42,10 @@ function set_message($message, $tipe = true)
 function userdata($field)
 {
     $ci = get_instance();
-    $ci->load->model('Admin_model', 'admin');
+    $ci->load->model('User_model', 'amod');
 
     $userId = $ci->session->userdata('login_session')['user'];
-    return $ci->admin->get('user', ['id_user' => $userId])[$field];
+    return $ci->amod->get('user', ['id_user' => $userId])[$field];
 }
 
 function output_json($data)

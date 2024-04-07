@@ -22,42 +22,23 @@
                 <div class="row mx-0">
                     <div class="form-group">
                         <label for="warga0" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="warga0" name="nama">
+                        <input type="text" class="form-control" id="warga0" placeholder="Nama Warga" name="nama">
                         <?= form_error('nama', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="row mx-0">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="warga1" class="form-label">Jenis Kelamin</label>
-                            <select class="form-control" id="warga1" name="jenis-kelamin">
-                                <option value=""></option>
-                                <option value="L">Laki-laki</option>
-                                <option value="P">Perempuan</option>
-                            </select>
-                            <?= form_error('jenis-kelamin', '<small class="text-danger">', '</small>'); ?>
-                        </div>
-                        <div class="form-group">
-                            <label for="warga2" class="form-label">Status Keluarga</label>
-                            <select class="form-control" id="warga2" name="status-keluarga">
-                                <option value=""></option>
-                                <option value="Kepala Keluarga">Kepala Keluarga</option>
-                                <option value="Istri">Istri</option>
-                                <option value="Anak">Anak</option>
-                            </select>
-                            <?= form_error('status-keluarga', '<small class="text-danger">', '</small>'); ?>
+                            <label for="warga3" class="form-label">Anggota Keluarga</label>
+                            <input type="number" min="0" step="0" class="form-control" id="warga3" placeholder="Jumlah anggota keluarga" name="jumlah">
+                            <?= form_error('jumlah', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="warga3" class="form-label">Jumlah Keluarga</label>
-                            <input type="number" min="0" step="0" class="form-control" id="warga3" name="jumlah">
-                            <?= form_error('jumlah', '<small class="text-danger">', '</small>'); ?>
-                        </div>
-                        <div class="form-group">
                             <label for="warga4" class="form-label">RT</label>
-                            <select class="form-control" id="warga4" name="rt">
-                                <option value=""></option>
+                            <select class="form-control" id="warga4" name="rt" aria-placeholder="Warga RT">
+                                <option>-- Warga RT? --</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
                                 <option value="03">03</option>
@@ -73,7 +54,6 @@
                     <div class="form-group">
                         <label for="warga5" class="form-label">Status Warga</label>
                         <select class="form-control" id="warga5" name="status-warga">
-                            <option value=""></option>
                             <option value="Muzakki">Muzakki</option>
                             <option value="Mustahik">Mustahik</option>
                         </select>
